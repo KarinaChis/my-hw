@@ -1,55 +1,191 @@
 import React, { Component } from 'react';
-import Input from './Input';
-import TextArea from './TextArea';
+import Input                from './InputField';
+import TextArea             from './TextArea';
+import '../App.css';
+
 
 export class Form extends Component {
+
+    constructor( props ){
+        super( props );
+        this.initialState = {
+            firstName:      "",
+            lastName:       "",
+            birthday:       "",
+            phone:          "",
+            url:            "",
+            aboutUser:      "",
+            stack:          "",
+            lastProject:    "",
+            errors:         {
+                firstName:      "",
+                lastName:       "",
+                birthday:       "",
+                phone:          "",
+                url:            "",
+                aboutUser:      "",
+                stack:          "",
+                lastProject:    "",
+            },
+            counters:       {
+                aboutUser:      600,
+                stack:          600,
+                lastProject:    600,
+            }
+        }
+        this.state      = this.initialState;
+        this.person     = this.props.person;
+        this.isData     = this.props.isData;
+        this.resetForm  = this.resetForm.bind(this);
+        this.onSubmit   = this.onSubmit.bind(this);
+        this.onChange   = this.onChange.bind(this);
+
+    }
+    
+    onChange = ( e ) => {
+        const fieldName = e.target.name;
+        const counters  = this.state.counters;
+
+        this.setState({ [e.target.name] : e.target.value });
+        if ( e.target.type === "tel" ) {
+            const x = e.target.value.replace(/\D/g, "").match(/(\d{0,1})(\d{0,4})(\d{0,2})(\d{0,2})/);
+            e.target.value = !x[2] ? x[1] : x[1] + "-" + x[2] + (x[3] ? "-" + x[3] : "") + (x[4] ? "-" + x[4] : "");
+        }
+        if ( e.target.className === "textArea" ) {    
+            counters[fieldName] = 600 - e.target.value.length
+            const key   = counters[fieldName]
+            const value = 600 - e.target.value.length
+            this.setState({ key: value }) 
+        }
+    }
+
+    formValidation = ( e ) => {
+        let isValid     = true;
+        const state     = this.state;
+        const errors    = this.state.errors;
+
+        for( let i in state ) {
+            if ( state[i] < 1 ) errors[i] = "Поле пустое. Заполните пожалуйста" 
+            else if ( i === "firstName" && state[i].trim().charAt(0) !== state[i].charAt(0).toUpperCase()
+                   || i === "lastName"  && state[i].trim().charAt(0) !== state[i].charAt(0).toUpperCase()) {
+                errors[i] = "Используйте заглавную букву для написания первого символа"
+            } else if ( i === "phone" && state[i].trim() == state[i].trim().replace(/^[0-9]{1}-[0-9]{4}-[0-9]{2}-[0-9]{2}$/,'')){
+                console.log(state[i].trim().replace(/^[0-9]{1}-[0-9]{4}-[0-9]{2}-[0-9]{2}$/,''))
+                errors[i] = 'Введите номер согласно шаблону "7-7777-77-77"';
+            } else if ( i === "url"   && state[i].trim() == state[i].trim().replace(/^https:\/\//,'')){
+                errors[i] = 'Введите url согласно шаблону "https://..."';
+            } else errors[i] = ""  
+            this.setState({ errors, [i]: state[i] })
+        }
+
+        Object.values(errors).forEach(( val ) => {
+            if( val.length > 0 ) return isValid = false
+        });
+        return isValid;
+    }
+
+    onSubmit = ( e ) => {
+        this.isData = this.formValidation();
+        if ( this.isData ) {
+            this.setState( this.initialState );
+            this.person = this.state;
+        }
+        const isData = this.isData;
+        const person = this.person;
+        this.props.changeData({ isData, person });
+        e.preventDefault();
+    }
+
+    resetForm(){ 
+        this.setState( this.initialState ) 
+        for ( let i in this.state.counters ){ this.state.counters[i] = 600 } 
+    }
+
     render() {
+        const { firstName, lastName, birthday, phone, url, aboutUser, stack, lastProject, errors, counters } = this.state;
         return (
-            <div className='background'>
-                <form className='form'>
-                    <legend className='titleForm'>Создание анкеты</legend>
+                <form 
+                    className   = { this.props.className }
+                    onSubmit    = { this.onSubmit } 
+                >
+                    <legend className = 'titleForm'>Создание анкеты</legend>
                     <Input 
-                        type="text" 
-                        label="Имя"
-                        placeholder="Enter your firstname"
+                        label       = "Имя"
+                        placeholder = "Введите свое имя"
+                        name        = "firstName"
+                        value       = { firstName }
+                        onChange    = { this.onChange }
+                        error       = { errors }
                     />
                     <Input 
-                        type="text" 
-                        label="Фамилия"
-                        placeholder="Enter your lastname"
+                        label       = "Фамилия"
+                        placeholder = "Введите свою фамилию"
+                        name        = "lastName"
+                        value       = { lastName }
+                        onChange    = { this.onChange }
+                        error       = { errors }
                     />
                     <Input 
-                        type="date" 
-                        label="Дата рождения"
-                        placeholder="Enter your birthday"
-                        // className={(this.state.date) ? 'hasValue' : ''}
+                        type        = "date" 
+                        label       = "Дата рождения"
+                        name        = "birthday"
+                        value       = { birthday }
+                        onChange    = { this.onChange }
+                        error       = { errors }
                     />
                     <Input 
-                        type="tel" 
-                        label="Телефон"
-                        placeholder="Enter your phone's number"
+                        type        = "tel" 
+                        label       = "Телефон"
+                        placeholder = "Введите свой номер телефона"
+                        name        = "phone"
+                        value       = { phone }
+                        onChange    = { this.onChange }
+                        maxLength   = "12"
+                        error       = { errors }
                     />
                     <Input 
-                        type="url" 
-                        label="Сайт"
-                        placeholder="Enter your web-site"
+                        type        = "url" 
+                        label       = "Сайт"
+                        placeholder = "Введите ссылку на сайт"
+                        name        = "url"
+                        value       = { url }
+                        onChange    = { this.onChange }
+                        error       = { errors }
                     />
                     <TextArea 
-                        label="О себе" 
-                        placeholder="Enter information about yourself"
+                        label       = "О себе" 
+                        placeholder = "Введите информацию о себе"
+                        name        = "aboutUser"
+                        value       = { aboutUser }
+                        onChange    = { this.onChange }
+                        error       = { errors }
+                        counters    = { counters }
                     />
                     <TextArea 
-                        label="Стек технологий"
-                        placeholder="Enter the information about the Stack of technologies used"
+                        label       = "Стек технологий"
+                        placeholder = "Введите используемый стек технологий"
+                        name        = "stack"
+                        value       = { stack }
+                        onChange    = { this.onChange }
+                        error       = { errors }
+                        counters    = { counters }
                     />
                     <TextArea 
-                        label="Описание последнего проекта"
-                        placeholder="Enter the Description of the last project"
+                        label       = "Описание последнего проекта"
+                        placeholder = "Введите описание последнего проекта"
+                        name        = "lastProject"
+                        value       = { lastProject }
+                        onChange    = { this.onChange }
+                        error       = { errors }
+                        counters    = { counters }
                     />
-                    <Input type="reset" name="Отмена"/>
-                    <Input type="submit" name="Сохранить"/>                
+                    <Input 
+                        type        = "reset"  
+                        valueButton = "Отмена" 
+                        onClick     = { this.resetForm }
+                    />
+                    <Input type = "submit" valueButton = "Сохранить"/>                
                 </form>
-            </div>
         )
     }
 }
