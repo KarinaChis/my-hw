@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Input                from './InputField';
 import TextArea             from './TextArea';
-import '../App.css';
+import styles               from '../App.module.css';
 
 
 export class Form extends Component {
@@ -45,17 +45,17 @@ export class Form extends Component {
     onChange = ( e ) => {
         const fieldName = e.target.name;
         const counters  = this.state.counters;
+        const errors    = this.state.errors;
+
+        errors[fieldName] = ""; 
 
         this.setState({ [e.target.name] : e.target.value });
         if ( e.target.type === "tel" ) {
             const x = e.target.value.replace(/\D/g, "").match(/(\d{0,1})(\d{0,4})(\d{0,2})(\d{0,2})/);
             e.target.value = !x[2] ? x[1] : x[1] + "-" + x[2] + (x[3] ? "-" + x[3] : "") + (x[4] ? "-" + x[4] : "");
         }
-        if ( e.target.className === "textArea" ) {    
+        if ( e.target.className === styles.textArea ) {    
             counters[fieldName] = 600 - e.target.value.length
-            const key   = counters[fieldName]
-            const value = 600 - e.target.value.length
-            this.setState({ key: value }) 
         }
     }
 
@@ -66,14 +66,14 @@ export class Form extends Component {
 
         for( let i in state ) {
             if ( state[i] < 1 ) errors[i] = "Поле пустое. Заполните пожалуйста" 
-            else if ( i === "firstName" && state[i].trim().charAt(0) !== state[i].charAt(0).toUpperCase()
-                   || i === "lastName"  && state[i].trim().charAt(0) !== state[i].charAt(0).toUpperCase()) {
+            else if (( i === "firstName" || i === "lastName" ) && state[i].trim().charAt(0) !== state[i].charAt(0).toUpperCase() ){
                 errors[i] = "Используйте заглавную букву для написания первого символа"
-            } else if ( i === "phone" && state[i].trim() == state[i].trim().replace(/^[0-9]{1}-[0-9]{4}-[0-9]{2}-[0-9]{2}$/,'')){
-                console.log(state[i].trim().replace(/^[0-9]{1}-[0-9]{4}-[0-9]{2}-[0-9]{2}$/,''))
+            } else if ( i === "phone" && state[i].trim() === state[i].trim().replace(/^[0-9]{1}-[0-9]{4}-[0-9]{2}-[0-9]{2}$/,'')){
                 errors[i] = 'Введите номер согласно шаблону "7-7777-77-77"';
-            } else if ( i === "url"   && state[i].trim() == state[i].trim().replace(/^https:\/\//,'')){
+            } else if ( i === "url" && state[i].trim() === state[i].trim().replace(/^https:\/\//,'')){
                 errors[i] = 'Введите url согласно шаблону "https://..."';
+            }  else if ( state[i].length > 600 ){
+                errors[i] = " ";
             } else errors[i] = ""  
             this.setState({ errors, [i]: state[i] })
         }
@@ -97,18 +97,20 @@ export class Form extends Component {
     }
 
     resetForm(){ 
-        this.setState( this.initialState ) 
+        this.setState( this.initialState )        
         for ( let i in this.state.counters ){ this.state.counters[i] = 600 } 
     }
 
     render() {
         const { firstName, lastName, birthday, phone, url, aboutUser, stack, lastProject, errors, counters } = this.state;
+        const FORM_TITLE = "Создание анкеты";
+
         return (
                 <form 
                     className   = { this.props.className }
                     onSubmit    = { this.onSubmit } 
                 >
-                    <legend className = 'titleForm'>Создание анкеты</legend>
+                    <legend className = { styles.titleForm }>{ FORM_TITLE }</legend>
                     <Input 
                         label       = "Имя"
                         placeholder = "Введите свое имя"

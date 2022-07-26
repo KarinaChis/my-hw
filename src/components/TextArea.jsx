@@ -1,26 +1,32 @@
 import React, { Component } from 'react';
+import styles               from '../App.module.css';
+
 
 class TextArea extends Component {
     render() {
         const { label, rows, placeholder, name, onChange, error, counters } = this.props;
-        const countVal = counters[name]
+        const countVal           = counters[name];
+        const TEXT_COUNTER       = `Осталось ${countVal}/600 символов`;
+        const TEXT_ERROR         = "Превышен лимит символов в поле";
+        const DEFAULT_FIELD_ROWS = "7";
+
         return (
             <>
-                <label className="label">{ label }</label>
+                <label className = { styles.label }>{ label }</label>
                 <textarea 
-                    rows        = { rows || 7 }
+                    rows        = { rows || DEFAULT_FIELD_ROWS }
                     placeholder = { placeholder }
                     name        = { name }
                     onChange    = { onChange }
-                    className   = "textArea"
+                    className   = { styles.textArea }
                 />
-                <span className = { (countVal >= 0) ? "counter" : "disable" }>
-                    { "Осталось " + countVal + "/600 символов" }
+                <span className = { (countVal >= 0) ? styles.counter : styles.disable }>
+                    { TEXT_COUNTER }
                 </span>
-                <span className = { (countVal < 0) ? "error" : "disable" }>
-                    { "Превышен лимит символов в поле" }
+                <span className = { (countVal < 0) ? styles.error : styles.disable }>
+                    { TEXT_ERROR }
                 </span>
-                <span className = "error">{ error[name] }</span>
+                <span className = { styles.error }>{ error[name] }</span>
             </>
         )
     }

@@ -1,23 +1,26 @@
 import React, { Component } from 'react';
+import styles               from '../App.module.css';
 
 class InputField extends Component {
     
     render() {
         const { label, type, placeholder, valueButton, name, onChange, onClick, value, maxLength, error = "" } = this.props;
+        const DATE_NAME = "birthday";
+
         return (
             <>
-                <label className = "label">{ label }</label>
+                <label className = { styles.label }>{ label }</label>
                 <input 
-                    type        = { type || "text" } 
+                    type        = { type || styles.text } 
                     placeholder = { placeholder }
                     name        = { name }
                     onChange    = { onChange }
                     onClick     = { onClick }
                     value       = { valueButton }
-                    className   = { ( name === "birthday" && value ) ? "inputField hasValue" : "inputField" }
+                    className   = { ( name === DATE_NAME && value ) ? styles.hasDateValue : styles.inputField }
                     maxLength   = { maxLength }
                 />
-                <span className = "error">{ error[name] }</span>
+                <span className = { styles.error }>{ error[name] }</span>
             </>   
         )
     }

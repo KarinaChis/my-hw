@@ -1,17 +1,21 @@
 import React, { Component } from 'react';
+import styles               from '../App.module.css';
+
 
 class OutputField extends Component {
 
     render(){
-        let { className, title, value } = this.props;
+        let { value } = this.props;
+        const { className, title = "" } = this.props;
+        const DATE_TITLE = "Дата рождения: ";
 
-        if ( title === "Дата рождения: " && value ) {
+        if ( title === DATE_TITLE && value ) {
             value = value.slice(8) + "." + value.slice(5,7) + "." + value.slice(0,4)
         }
         return(
-            <div className = { className || "stringProfile" } >
-                <div className = "label outputFieldTitle">{ title }</div>
-                <div className = "outputField">{ value }</div>
+            <div className = { className || styles.stringProfile } >
+                <div className = { styles.outputFieldTitle }>{ title }</div>
+                <div className = { styles.outputField }>{ value }</div>
             </div>
         )
     }

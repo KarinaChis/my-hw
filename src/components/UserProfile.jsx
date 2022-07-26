@@ -1,24 +1,32 @@
 import React, { Component } from 'react';
 import OutputField          from './OutputField';
 import OutputTextArea       from './OutputTextArea';
+import styles               from '../App.module.css';
+
 
 class UserProfile extends Component {
 
     render(){
         const { firstName, lastName, birthday, phone, url, aboutUser, stack, lastProject } = this.props.person;
+        const DATE_TITLE         = "Дата рождения: ";
+        const PHONE_TITLE        = "Телефон: ";
+        const SITE_TITLE         = "Сайт: ";
+        const ABOUT_USER_TITLE   = "О себе: ";
+        const STACK_TITLE        = "Стек технологий: ";
+        const LAST_PROJECT_TITLE = "Описание последнего проекта: ";
+
         return(
             <div className = { this.props.className }>
                 <OutputField 
-                    className   = "titleForm"
-                    title       = " " 
+                    className   = { styles.titleForm }
                     value       = { firstName + " " + lastName }
                 />
-                <OutputField    title = "Дата рождения: "               value = { birthday }/>
-                <OutputField    title = "Телефон: "                     value = { phone }/>
-                <OutputField    title = "Сайт: "                        value = { url }/>
-                <OutputTextArea title = "О себе: "                      value = { aboutUser }/>
-                <OutputTextArea title = "Стек технологий: "             value = { stack }/>
-                <OutputTextArea title = "Описание последнего проекта: " value = { lastProject }/>
+                <OutputField    title = { DATE_TITLE }         value = { birthday }/>
+                <OutputField    title = { PHONE_TITLE }        value = { phone }/>
+                <OutputField    title = { SITE_TITLE }         value = { url }/>
+                <OutputTextArea title = { ABOUT_USER_TITLE }   value = { aboutUser }/>
+                <OutputTextArea title = { STACK_TITLE }        value = { stack }/>
+                <OutputTextArea title = { LAST_PROJECT_TITLE } value = { lastProject }/>
             </div>  
         )
     }
