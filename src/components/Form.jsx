@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Input                from './InputField';
 import TextArea             from './TextArea';
-import styles               from '../App.module.css';
+import styles               from './Form.module.css';
 
 
 export class Form extends Component {

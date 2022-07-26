@@ -1,7 +1,7 @@
 import { Component } from 'react';
-import styles from './App.module.css';
-import Form from './components/Form';
-import UserProfile from './components/UserProfile';
+import styles       from './App.module.css';
+import Form         from './components/Form';
+import UserProfile  from './components/UserProfile';
 
 class App extends Component{
   constructor( props ){
@@ -18,17 +18,17 @@ class App extends Component{
   
   render(){
     return(
-      <div className = { styles.App }>
+      <div>
         <div className = { styles.background }>
             <Form 
               person      = { this.state.person } 
               isData      = { this.state.isData }
-              className   = { (this.state.isData === true) ? styles.disable : styles.form }
+              className   = { (this.state.isData === true) ? styles.disable : styles.container }
               changeData  = { this.onChange }
             /> 
             <UserProfile 
               person    = { this.state.person } 
-              className = { (this.state.isData === true) ? styles.form : styles.disable }
+              className = { (this.state.isData === true) ? styles.container : styles.disable }
             />
         </div>
       </div>

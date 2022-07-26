@@ -1,5 +1,4 @@
         /* pseudo */
-
 :focus{
   outline: none;
 }
@@ -11,21 +10,8 @@
   opacity: 0.8;
   font-size: 12px;
 }
-.inputField:hover, .textArea:hover{
-  border: 1px solid gray;
-  border-width: 0 0 1px;
-}
-.inputField[type="reset"]:active, .inputField[type="submit"]:active{
-  border: 1px solid lightgray;
-}
-input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus, 
-input:-webkit-autofill:active  {
-    -webkit-box-shadow: 0 0 0 30px #fdfcff inset !important;
-}
 
-        /* form styles */
+        /* common styles */
 
 *{
   box-sizing: border-box;
@@ -33,15 +19,13 @@ input:-webkit-autofill:active  {
   padding: 0;
   font-family: 'Open Sans', sans-serif;
 }
-.App{
-}
 .background{
-  /* background-color: rgba(22, 3, 30, 0.85); */
-  display:flex;
+  background-color: rgba(22, 3, 30, 0.85);
+  display: flex;
   justify-content: center;
   padding: 20px;
 }
-.form{
+.container{
   display:flex;
   flex-direction: column;
   align-items: flex-end;
@@ -52,79 +36,7 @@ input:-webkit-autofill:active  {
   border-radius: 3px;
   box-shadow: #333 1px 1px 10px 1px;
 }
-.titleForm{
-  font-size: larger;
-  align-self: center;
-}
-.label{
-  margin: 10px 3px 0;
-  font-size: 14px;
-  color:rgba(22, 3, 30, 0.75);
-}
-.inputField, .textArea{
-  padding: 3px 3px 8px;
-  width: 100%;
-  resize: none;
-  border: 1px solid lightgray;
-  border-width: 0 0 1px;
-  background-color: #fdfcff;
-  font-size: 16px;
-}
-.inputField[type="date"]{
-  color: rgb(167, 167, 167);
-  font-size: 12px;
-}
-.hasDateValue{
-  /* composes: inputField ; */
-  padding: 3px 3px 8px;
-  width: 100%;
-  border: 1px solid lightgray;
-  border-width: 0 0 1px;
-  background-color: #fdfcff;
-  color: black;
-  font-size: 16px;
-}
-.inputField[type="reset"], .inputField[type="submit"]{
-  cursor: pointer;
-  border-radius: 3px;
-  padding: 8px;
-}
-.inputField[type="reset"]{
-  background-color: white;
-  border-width: 1px;
-}
-.inputField[type="submit"]{
-  background-color: rgb(6, 225, 177);
-  font-weight: bolder;
-}
-.error{
-  color:red;
-  font-size: 11px;
-  text-align: left;
-  font-style: italic;
-}
-.counter{
-  font-size: 11px;
-}
 .disable{
-  display: none !important;
+  display: none;
 }
-.stringProfile{
-  margin: 8px 5px;
-  align-self: flex-start;
-  width: 100%;
-}
-.outputFieldTitle{
-  font-size: 14px;
-  color:rgba(22, 3, 30, 0.75);
-  margin:  0;
-  text-decoration: underline;
-}
-.outputField{
-  padding: 3px 0;
-  font-size: 16px;
-  resize: none;
-  width: 100%;
-  border: 0;
-  background-color: #fdfcff;
-}
+

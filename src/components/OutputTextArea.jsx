@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import styles               from '../App.module.css';
+import styles               from './UserProfile.module.css';
 
 
 class OutputTextArea extends Component {
@@ -8,7 +8,7 @@ class OutputTextArea extends Component {
         const DEFAULT_FIELD_ROWS = "7";
         
         return (
-            <div className = { styles.stringProfile } >
+            <div className = { styles.containerOutputField } >
                 <label className = { styles.outputFieldTitle }>{ title }</label>
                 <textarea 
                     className   = { styles.outputField }

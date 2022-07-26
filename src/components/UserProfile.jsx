@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import OutputField          from './OutputField';
 import OutputTextArea       from './OutputTextArea';
-import styles               from '../App.module.css';
+import styles               from './UserProfile.module.css';
 
 
 class UserProfile extends Component {
