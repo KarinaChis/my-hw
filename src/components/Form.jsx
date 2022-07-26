@@ -43,20 +43,22 @@ export class Form extends Component {
     }
     
     onChange = ( e ) => {
-        const fieldName = e.target.name;
-        const counters  = this.state.counters;
-        const errors    = this.state.errors;
+        const fieldName  = e.target.name;
+        const counters   = this.state.counters;
+        const errors     = this.state.errors;
+        const countValue = 600 - e.target.value.length;
 
         errors[fieldName] = ""; 
 
         this.setState({ [e.target.name] : e.target.value });
         if ( e.target.type === "tel" ) {
-            const x = e.target.value.replace(/\D/g, "").match(/(\d{0,1})(\d{0,4})(\d{0,2})(\d{0,2})/);
-            e.target.value = !x[2] ? x[1] : x[1] + "-" + x[2] + (x[3] ? "-" + x[3] : "") + (x[4] ? "-" + x[4] : "");
+            const matchedString = e.target.value.replace(/\D/g, "").match(/(\d{0,1})(\d{0,4})(\d{0,2})(\d{0,2})/);
+            e.target.value = !matchedString[2] ? matchedString[1] 
+                : matchedString[1] + "-" + matchedString[2] 
+                + (matchedString[3] ? "-" + matchedString[3] : "") 
+                + (matchedString[4] ? "-" + matchedString[4] : "");
         }
-        if ( e.target.className === styles.textArea ) {    
-            counters[fieldName] = 600 - e.target.value.length
-        }
+        if ( e.target.className === styles.textArea ) counters[fieldName] = countValue;
     }
 
     formValidation = ( e ) => {
