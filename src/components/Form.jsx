@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState }  from 'react';
 import Input                from './InputField';
 import TextArea             from './TextArea';
 import styles               from './Form.module.css';
@@ -6,17 +6,16 @@ import styles               from './Form.module.css';
 
 function Form ( props ) {
 
-    const FORM_TITLE = "Создание анкеты";
-    // let person     = props.person;
-    let isData     = props.isData;
+    let   isData        = props.isData;
+    const FORM_TITLE    = "Создание анкеты";
     const initialPerson = {
-        firstName: "", 
-        lastName: "", 
-        birthday: "", 
-        phone: "", 
-        url: "", 
-        aboutUser: "", 
-        stack: "", 
+        firstName:   "", 
+        lastName:    "", 
+        birthday:    "", 
+        phone:       "", 
+        url:         "", 
+        aboutUser:   "", 
+        stack:       "", 
         lastProject: "",
     }
     const initialCounter = {
@@ -24,15 +23,14 @@ function Form ( props ) {
         stack:          600,
         lastProject:    600,
     }
-    let [ person, setPerson ]     = useState( initialPerson );
-    let [ errors, setErrors ]     = useState( initialPerson );
-    let [ counters, setCounters ] = useState( initialCounter );
+    const [ person,   setPerson ]   = useState( initialPerson );
+    const [ errors,   setErrors ]   = useState( {} );
+    const [ counters, setCounters ] = useState( initialCounter );
 
     
     const onChange = ( e ) => {
-        const fieldName  = e.target.name;
-        const countValue = 600 - e.target.value.length;
-        errors[fieldName] = ""; 
+        const fieldName     = e.target.name;
+        errors[ fieldName ] = ""; 
 
         if ( e.target.type === "tel" ) {
             const matchedString = e.target.value.replace(/\D/g, "").match(/(\d{0,1})(\d{0,4})(\d{0,2})(\d{0,2})/);
@@ -41,45 +39,30 @@ function Form ( props ) {
                 + (matchedString[3] ? "-" + matchedString[3] : "") 
                 + (matchedString[4] ? "-" + matchedString[4] : "");
         }
+        if ( e.target.className === styles.textArea ) counters[ fieldName ] = 600 - e.target.value.length;
+
         setPerson({...person, [ fieldName ] : e.target.value })
-
-        console.log("person ", person)
-        console.log("fieldName  ", fieldName)
-        console.log("e.target.value  ", e.target.value)
-
-
-
-        if ( e.target.className === styles.textArea ) counters[ fieldName ] = countValue;
     }
 
     const formValidation = ( e ) => {
         let isValid = true;
-        // console.log("person")
+        let errorsArray = errors;
 
         for( let i in person ) {
-            if ( person[i] < 1 ) errors[i] = "Поле пустое. Заполните пожалуйста" 
-            else if (( i === "firstName" || i === "lastName" ) && person[i].trim().charAt(0) !== person[i].charAt(0).toUpperCase() ){
-                // setErrors({...errors, [ i ] : "Используйте заглавную букву для написания первого символа" })
-                errors[i] = "Используйте заглавную букву для написания первого символа"
+            if ( person[i] < 1 ) { 
+                errorsArray[i] = "Поле пустое. Заполните пожалуйста" 
+            } else if (( i === "firstName" || i === "lastName" ) 
+                && person[i].trim().charAt(0) !== person[i].charAt(0).toUpperCase() ){
+                errorsArray[i] = "Используйте заглавную букву для написания первого символа"
             } else if ( i === "phone" && person[i].trim() === person[i].trim().replace(/^[0-9]{1}-[0-9]{4}-[0-9]{2}-[0-9]{2}$/,'')){
-                // setErrors({...errors, [ i ] : 'Введите номер согласно шаблону "7-7777-77-77"' })
-                errors[i] = 'Введите номер согласно шаблону "7-7777-77-77"';
+                errorsArray[i] = 'Введите номер согласно шаблону "7-7777-77-77"';
             } else if ( i === "url" && person[i].trim() === person[i].trim().replace(/^https:\/\//,'')){
-                // setErrors({...errors, [ i ] : 'Введите url согласно шаблону "https://..."' })
-                errors[i] = 'Введите url согласно шаблону "https://..."';
+                errorsArray[i] = 'Введите url согласно шаблону "https://..."';
             }  else if ( person[i].length > 600 ){
-                // setErrors({...errors, [ i ] : " " })
-                errors[i] = " ";
-            } else 
-            // setErrors({...errors, [ i ] : "" })
-            
-            setErrors({...errors, [ i ] : person[i] })
-            console.log("errors ", errors)
-            console.log("[i] ", i)
-
-            console.log("person[i] ", person[i])
-
+                errorsArray[i] = " ";
+            } else errorsArray[i] = ""; 
         }
+        setErrors({...errors}, errorsArray)
 
         Object.values( errors ).forEach(( val ) => {
             if( val.length > 0 ) return isValid = false
@@ -96,14 +79,13 @@ function Form ( props ) {
         e.preventDefault();
     }
 
-    const resetForm = () =>{ 
-        setPerson( initialPerson )
-        setErrors( initialPerson );
-        setCounters( initialCounter );
+    const resetForm = () => { 
+        setPerson({ ...initialPerson });
+        setErrors({ });
+        setCounters({ ...initialCounter });
     }
 
     const { firstName, lastName, birthday, phone, url, aboutUser, stack, lastProject } = person;
-
 
     return (
         <form 
