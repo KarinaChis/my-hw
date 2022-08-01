@@ -19,7 +19,7 @@ function InputField ( props ) {
                 className   = { ( name === DATE_NAME && value ) ? styles.hasDateValue : styles.inputField }
                 maxLength   = { maxLength }
             />
-            <span className = { styles.error }>{ error[name] }</span>
+            <span className = { styles.error }>{ error }</span>
         </>   
     )
 

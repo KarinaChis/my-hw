@@ -49,7 +49,7 @@ function Form ( props ) {
         let errorsArray = errors;
 
         for( let i in person ) {
-            if ( person[i] < 1 ) { 
+            if ( !person[i] ) {
                 errorsArray[i] = "Поле пустое. Заполните пожалуйста" 
             } else if (( i === "firstName" || i === "lastName" ) 
                 && person[i].trim().charAt(0) !== person[i].charAt(0).toUpperCase() ){
@@ -59,14 +59,11 @@ function Form ( props ) {
             } else if ( i === "url" && person[i].trim() === person[i].trim().replace(/^https:\/\//,'')){
                 errorsArray[i] = 'Введите url согласно шаблону "https://..."';
             }  else if ( person[i].length > 600 ){
-                errorsArray[i] = " ";
+                errorsArray[i] = " ";   // this error exists to prevent submit form, when the maximum value is exceeded (checked and render by TextArea)
             } else errorsArray[i] = ""; 
         }
         setErrors({...errors}, errorsArray)
-
-        Object.values( errors ).forEach(( val ) => {
-            if( val.length > 0 ) return isValid = false
-        });
+        isValid = !Object.values(errors).some((value) => !!value);
         return isValid;
     }
 
@@ -99,7 +96,7 @@ function Form ( props ) {
                 name        = "firstName"
                 value       = { firstName }
                 onChange    = { onChange }
-                error       = { errors }
+                error       = { errors.firstName }
             />
             <Input 
                 label       = "Фамилия"
@@ -107,7 +104,7 @@ function Form ( props ) {
                 name        = "lastName"
                 value       = { lastName }
                 onChange    = { onChange }
-                error       = { errors }
+                error       = { errors.lastName }
             />
             <Input 
                 type        = "date" 
@@ -115,7 +112,7 @@ function Form ( props ) {
                 name        = "birthday"
                 value       = { birthday }
                 onChange    = { onChange }
-                error       = { errors }
+                error       = { errors.birthday }
             />
             <Input 
                 type        = "tel" 
@@ -125,7 +122,7 @@ function Form ( props ) {
                 value       = { phone }
                 onChange    = { onChange }
                 maxLength   = "12"
-                error       = { errors }
+                error       = { errors.phone }
             />
             <Input 
                 type        = "url" 
@@ -134,7 +131,7 @@ function Form ( props ) {
                 name        = "url"
                 value       = { url }
                 onChange    = { onChange }
-                error       = { errors }
+                error       = { errors.url }
             />
             <TextArea 
                 label       = "О себе" 
@@ -142,8 +139,8 @@ function Form ( props ) {
                 name        = "aboutUser"
                 value       = { aboutUser }
                 onChange    = { onChange }
-                error       = { errors }
-                counters    = { counters }
+                error       = { errors.aboutUser }
+                counter     = { counters.aboutUser }
             />
             <TextArea 
                 label       = "Стек технологий"
@@ -151,8 +148,8 @@ function Form ( props ) {
                 name        = "stack"
                 value       = { stack }
                 onChange    = { onChange }
-                error       = { errors }
-                counters    = { counters }
+                error       = { errors.stack }
+                counter     = { counters.stack }
             />
             <TextArea 
                 label       = "Описание последнего проекта"
@@ -160,8 +157,8 @@ function Form ( props ) {
                 name        = "lastProject"
                 value       = { lastProject }
                 onChange    = { onChange }
-                error       = { errors }
-                counters    = { counters }
+                error       = { errors.lastProject }
+                counter     = { counters.lastProject }
             />
             <Input 
                 type        = "reset"  
