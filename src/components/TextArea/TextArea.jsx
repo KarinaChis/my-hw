@@ -1,6 +1,5 @@
 import React  from 'react';
-import styles from './form.module.css';
-
+import styles from './textArea.module.css';
 
 function TextArea ( props ) {
     const { label, rows, placeholder, name, onChange, error, counter } = props;

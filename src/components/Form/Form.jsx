@@ -1,6 +1,6 @@
 import React, { useState }  from 'react';
-import Input                from './InputField';
-import TextArea             from './TextArea';
+import Input                from '../InputField/InputField';
+import TextArea             from '../TextArea/TextArea';
 import styles               from './form.module.css';
 
 
@@ -39,7 +39,7 @@ function Form ( props ) {
                 + (matchedString[3] ? "-" + matchedString[3] : "") 
                 + (matchedString[4] ? "-" + matchedString[4] : "");
         }
-        if ( e.target.className === styles.textArea ) counters[ fieldName ] = 600 - e.target.value.length;
+        if ( e.target.type === "textarea" ) counters[ fieldName ] = 600 - e.target.value.length;
 
         setPerson({...person, [ fieldName ] : e.target.value })
     }

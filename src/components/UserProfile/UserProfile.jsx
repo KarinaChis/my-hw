@@ -1,6 +1,6 @@
 import React            from 'react';
-import OutputField      from './OutputField';
-import OutputTextArea   from './OutputTextArea';
+import OutputField      from '../OutputField/OutputField';
+import OutputTextArea   from '../OutputTextArea/OutputTextArea';
 import styles           from './userProfile.module.css';
 
 

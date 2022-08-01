@@ -1,6 +1,6 @@
 import React  from 'react';
-import styles from './userProfile.module.css';
-
+// import styles from '../UserProfile/userProfile.module.css';
+import styles from './outputTextArea.module.css';
 
 function OutputTextArea ( props ) {
     const { title, value }   = props;
