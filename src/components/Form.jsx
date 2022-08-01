@@ -9,7 +9,7 @@ export class Form extends Component {
     constructor( props ){
         super( props );
         this.initialState = {
-            firstName:       "",
+            firstName:      "",
             lastName:       "",
             birthday:       "",
             phone:          "",
@@ -18,7 +18,7 @@ export class Form extends Component {
             stack:          "",
             lastProject:    "",
             errors:         {
-                firstName:       "",
+                firstName:      "",
                 lastName:       "",
                 birthday:       "",
                 phone:          "",
@@ -77,9 +77,8 @@ export class Form extends Component {
             }  else if ( state[i].length > 600 ){
                 errors[i] = " ";    // this error exists to prevent submit form, when the maximum value is exceeded (checked and render by TextArea)
             } else errors[i] = ""  
-            this.setState({ errors, [i]: state[i] })
         }
-
+        this.setState({ errors })
         isValid = !Object.values(errors).some((value) => !!value);
         return isValid;
     }
