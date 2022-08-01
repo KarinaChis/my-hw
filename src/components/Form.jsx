@@ -1,7 +1,7 @@
 import React, { useState }  from 'react';
 import Input                from './InputField';
 import TextArea             from './TextArea';
-import styles               from './Form.module.css';
+import styles               from './form.module.css';
 
 
 function Form ( props ) {

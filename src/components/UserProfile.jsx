@@ -1,7 +1,7 @@
 import React            from 'react';
 import OutputField      from './OutputField';
 import OutputTextArea   from './OutputTextArea';
-import styles           from './UserProfile.module.css';
+import styles           from './userProfile.module.css';
 
 
 function UserProfile ( props ) {
