@@ -1,24 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="07f9c6ff-06a8-47c1-b9b0-3ec7819ace27" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/Form/form.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/InputField/inputField.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/OutputField/outputField.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/OutputTextArea/outputTextArea.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/TextArea/textArea.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/UserProfile/userProfile.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Form.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Form/Form.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Form.module.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/InputField.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/InputField/InputField.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/OutputField.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/OutputField/OutputField.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/OutputTextArea.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/OutputTextArea/OutputTextArea.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/TextArea.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TextArea/TextArea.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/UserProfile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/UserProfile/UserProfile.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/UserProfile.module.css" beforeDir="false" />
-    </list>
+    <list default="true" id="07f9c6ff-06a8-47c1-b9b0-3ec7819ace27" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -76,7 +59,7 @@
       <workItem from="1659299254289" duration="4672000" />
       <workItem from="1659304543517" duration="123000" />
       <workItem from="1659356214206" duration="2036000" />
-      <workItem from="1659359207389" duration="3021000" />
+      <workItem from="1659359207389" duration="3332000" />
     </task>
     <servers />
   </component>
