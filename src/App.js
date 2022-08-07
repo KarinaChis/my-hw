@@ -1,16 +1,20 @@
-import { Component } from 'react';
-import './App.css';
-import Form from './components/Form';
+import React from "react";
+import styles from './App.module.css';
+import Header from "./components/Header/Header";
+import Todo from "./components/Todo/Todo";
+import Login from "./components/Login/Login";
 
-class App extends Component{
-  render(){
+const App = () => {
+
     return(
-      <div className="App">
-        <Form />
+      <div className = { styles.container }>
+          <div className = { styles.appWrapper }>
+              <Header />
+              <Todo />
+              <Login />
+          </div>
       </div>
-    )
-  }
+  )
 }
 
 export default App;
- 
