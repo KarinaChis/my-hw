@@ -11,7 +11,7 @@ const TodoList = () => {
             {todos.map((todo) => (
                 <TodoItem
                     id = { todo.id }
-                    title={ todo.title }
+                    title = { todo.title }
                     key = { todo.id }
                     isCompleted = { todo.completed }
                 />

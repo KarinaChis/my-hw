@@ -3,12 +3,14 @@ import styles from './header.module.css';
 import { useSelector } from "react-redux";
 
 const Header = () => {
-    const ACTIVE_TASK_TEXT = "Активных задач: ";
     const count = useSelector( state => state.count );
+    const name = useSelector( state => state.name );
+    const isLogin = useSelector( state => state.isLogin );
+    const ACTIVE_TASK_TEXT = (isLogin) ? `Активных задач: ${count}` : "Введите ваше имя";
     return (
         <div className={ styles.header }>
-            <h1>Your name</h1>
-            <div>{ ACTIVE_TASK_TEXT + count}</div>
+            <h1>{ name }</h1>
+            <div>{ ACTIVE_TASK_TEXT }</div>
         </div>
     )
 }

@@ -5,7 +5,7 @@ import Form from "../Form/Form";
 const Login = () => {
     return (
         <div className = { styles.loginWrapper }>
-            <Form />
+            <Form type = "login"/>
         </div>
     )
 }

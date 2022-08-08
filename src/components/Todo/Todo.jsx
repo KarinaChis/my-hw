@@ -6,7 +6,7 @@ import TodoList from "../TodoList/TodoList";
 const Todo = () => {
     return (
         <div className = { styles.todoWrapper }>
-            <Form />
+            <Form type = "todo"/>
             <TodoList />
         </div>
     )
