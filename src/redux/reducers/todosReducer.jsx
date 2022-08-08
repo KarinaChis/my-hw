@@ -1,14 +1,10 @@
-const ADD_TODO = "ADD_TODO";
-const EDIT_TODO = "EDIT_TODO";
-const DELETE_TODO = "DELETE_TODO";
-const CHANGE_COMPLETED = "CHANGE_COMPLETED";
-const ADD_LOGIN = "ADD_LOGIN";
+import { ADD_TODO, EDIT_TODO, DELETE_TODO,CHANGE_COMPLETED, ADD_LOGIN, CHANGE_SELECTED_TODOS } from '../actionsTypes'
 
 const initialState = {
     todos: [],
-    count: 0,
     name: "",
-    isLogin: false
+    isLogin: false,
+    selectedTodos: "all"
 }
 export const todosReducer = ( state = initialState, action ) => {
     const newTodo = {
@@ -20,8 +16,7 @@ export const todosReducer = ( state = initialState, action ) => {
         case ADD_TODO:
             return {
                 ...state,
-                todos: [ ...state.todos, newTodo ],
-                count: state.todos.filter(( todo ) => todo.completed === false).length
+                todos: [ ...state.todos, newTodo ]
             };
         case EDIT_TODO:
             return {
@@ -36,8 +31,7 @@ export const todosReducer = ( state = initialState, action ) => {
         case DELETE_TODO:
             return {
                 ...state,
-                todos: state.todos.filter(( todo ) => todo.id !== action.payload),
-                count: state.todos.filter(( todo ) => todo.completed === false).length
+                todos: state.todos.filter(( todo ) => todo.id !== action.payload)
             };
         case CHANGE_COMPLETED:
             return {
@@ -48,13 +42,17 @@ export const todosReducer = ( state = initialState, action ) => {
                     }
                     return todo
                 }),
-                count: state.todos.filter(( todo ) => todo.completed === false).length
             };
         case ADD_LOGIN:
             return{
                 ...state,
                 name: action.payload,
                 isLogin: true
+            };
+        case CHANGE_SELECTED_TODOS:
+            return{
+                ...state,
+                selectedTodos: action.payload,
             };
         default:
             return state;

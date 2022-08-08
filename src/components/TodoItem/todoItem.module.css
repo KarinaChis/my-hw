@@ -1,27 +1,31 @@
-*{
-    box-sizing: border-box;
-}
+
+    /** pseudo **/
+
 .button:hover{
     cursor: pointer;
     border-radius: 5px;
     border: 1px solid rgba(22, 3, 30, 0.2);
 }
-.todoOutput:hover, .todoOutputCompleted:hover{
+.todoOutput:hover{
     cursor: pointer;
 }
 ::selection {
     background: transparent;
 }
 
+    /** common **/
 
+*{
+    box-sizing: border-box;
+}
 .todoWrapper{
-    margin: 10px 5px;
+    margin: 0 5px 10px;
     align-self: flex-start;
     width: 100%;
     list-style-type: none;
     display: flex;
 }
-.todoOutput, .todoOutputCompleted{
+.todoOutput{
     padding: 3px 0;
     font-size: 16px;
     resize: none;
@@ -37,7 +41,6 @@
     background-color: #fdfcff;
     padding: 0 4px;
     border: 1px solid transparent;
-
 }
 .buttonImage{
     height: 17px;

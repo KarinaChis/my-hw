@@ -32,7 +32,6 @@ function TodoItem({ id, title, isCompleted }) {
             }
         });
     }
-
     const onDelete = () => dispatch({
         type: "DELETE_TODO",
         payload: id
@@ -41,7 +40,7 @@ function TodoItem({ id, title, isCompleted }) {
     return (
         <li className = { styles.todoWrapper } >
             <input
-                className = { isCompleted ? styles.todoOutputCompleted : styles.todoOutput }
+                className = {`${styles.todoOutput} ${isCompleted ? styles.todoOutputCompleted : ""}`}
                 value = { todoValue }
                 readOnly = { !isEditTodo }
                 onClick = { !isEditTodo ? onChangeCompleted : onChangeValue }

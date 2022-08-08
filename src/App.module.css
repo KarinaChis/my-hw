@@ -1,4 +1,6 @@
-/* pseudo */
+
+  /* pseudo */
+
 :focus{
   outline: none;
 }
@@ -8,7 +10,7 @@
   font-size: 12px;
 }
 
-/* common styles */
+  /** common **/
 
 *{
   box-sizing: border-box;
